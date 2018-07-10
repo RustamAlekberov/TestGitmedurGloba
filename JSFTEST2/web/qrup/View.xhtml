@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="QrupViewDlg" widgetVar="QrupViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewQrupTitle}">
+            <h:form id="QrupViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{qrupController.selected != null}">
+                        <h:outputText value="#{bundle.ViewQrupLabel_idQrup}"/>
+                        <h:outputText value="#{qrupController.selected.idQrup}" title="#{bundle.ViewQrupTitle_idQrup}"/>
+                        <h:outputText value="#{bundle.ViewQrupLabel_qrupAdi}"/>
+                        <h:outputText value="#{qrupController.selected.qrupAdi}" title="#{bundle.ViewQrupTitle_qrupAdi}"/>
+                        <h:outputText value="#{bundle.ViewQrupLabel_qrupKodu}"/>
+                        <h:outputText value="#{qrupController.selected.qrupKodu}" title="#{bundle.ViewQrupTitle_qrupKodu}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="QrupViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

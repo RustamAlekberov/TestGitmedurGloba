@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="QrupEditDlg" widgetVar="QrupEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditQrupTitle}">
+            <h:form id="QrupEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{qrupController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditQrupLabel_idQrup}" for="idQrup" />
+                        <p:inputText id="idQrup" value="#{qrupController.selected.idQrup}" title="#{bundle.EditQrupTitle_idQrup}" required="true" requiredMessage="#{bundle.EditQrupRequiredMessage_idQrup}"/>
+                        <p:outputLabel value="#{bundle.EditQrupLabel_qrupAdi}" for="qrupAdi" />
+                        <p:inputText id="qrupAdi" value="#{qrupController.selected.qrupAdi}" title="#{bundle.EditQrupTitle_qrupAdi}" required="true" requiredMessage="#{bundle.EditQrupRequiredMessage_qrupAdi}"/>
+                        <p:outputLabel value="#{bundle.EditQrupLabel_qrupKodu}" for="qrupKodu" />
+                        <p:inputText id="qrupKodu" value="#{qrupController.selected.qrupKodu}" title="#{bundle.EditQrupTitle_qrupKodu}" required="true" requiredMessage="#{bundle.EditQrupRequiredMessage_qrupKodu}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{qrupController.update}" value="#{bundle.Save}" update="display,:QrupListForm:datalist,:growl" oncomplete="handleSubmit(args, 'QrupEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="QrupEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

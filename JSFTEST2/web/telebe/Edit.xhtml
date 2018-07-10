@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TelebeEditDlg" widgetVar="TelebeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTelebeTitle}">
+            <h:form id="TelebeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{telebeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTelebeLabel_idTelebe}" for="idTelebe" />
+                        <p:inputText id="idTelebe" value="#{telebeController.selected.idTelebe}" title="#{bundle.EditTelebeTitle_idTelebe}" required="true" requiredMessage="#{bundle.EditTelebeRequiredMessage_idTelebe}"/>
+                        <p:outputLabel value="#{bundle.EditTelebeLabel_ad}" for="ad" />
+                        <p:inputText id="ad" value="#{telebeController.selected.ad}" title="#{bundle.EditTelebeTitle_ad}" required="true" requiredMessage="#{bundle.EditTelebeRequiredMessage_ad}"/>
+                        <p:outputLabel value="#{bundle.EditTelebeLabel_soyad}" for="soyad" />
+                        <p:inputText id="soyad" value="#{telebeController.selected.soyad}" title="#{bundle.EditTelebeTitle_soyad}" required="true" requiredMessage="#{bundle.EditTelebeRequiredMessage_soyad}"/>
+                        <p:outputLabel value="#{bundle.EditTelebeLabel_yash}" for="yash" />
+                        <p:inputText id="yash" value="#{telebeController.selected.yash}" title="#{bundle.EditTelebeTitle_yash}" required="true" requiredMessage="#{bundle.EditTelebeRequiredMessage_yash}"/>
+                        <p:outputLabel value="#{bundle.EditTelebeLabel_idQrup}" for="idQrup" />
+                        <p:selectOneMenu id="idQrup" value="#{telebeController.selected.idQrup}" required="true" requiredMessage="#{bundle.EditTelebeRequiredMessage_idQrup}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{qrupController.itemsAvailableSelectOne}"
+                                           var="idQrupItem"
+                                           itemValue="#{idQrupItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{telebeController.update}" value="#{bundle.Save}" update="display,:TelebeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TelebeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TelebeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTelebeTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TelebeListForm">
+                <p:panel header="#{bundle.ListTelebeTitle}">
+                    <p:dataTable id="datalist" value="#{telebeController.items}" var="item"
+                                 selectionMode="single" selection="#{telebeController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idTelebe}"
+                                 rows="5"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sıra no:"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTelebe}"/>
+                        </p:column>
+                        <p:column filterMatchMode="contains" filterBy="true">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTelebeTitle_ad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTelebeTitle_soyad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.soyad}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTelebeTitle_yash}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.yash}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTelebeTitle_idQrup}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idQrup}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{telebeController.prepareCreate}" update=":TelebeCreateForm" oncomplete="PF('TelebeCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TelebeViewForm" oncomplete="PF('TelebeViewDialog').show()" disabled="#{empty telebeController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TelebeEditForm" oncomplete="PF('TelebeEditDialog').show()" disabled="#{empty telebeController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{telebeController.destroy}" update=":growl,datalist" disabled="#{empty telebeController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

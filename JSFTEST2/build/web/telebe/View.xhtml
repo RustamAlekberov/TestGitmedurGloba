@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TelebeViewDlg" showEffect="explode" widgetVar="TelebeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTelebeTitle}">
+            <h:form id="TelebeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{telebeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTelebeLabel_idTelebe}"/>
+                        <h:outputText value="#{telebeController.selected.idTelebe}" title="#{bundle.ViewTelebeTitle_idTelebe}"/>
+                        <h:outputText value="#{bundle.ViewTelebeLabel_ad}"/>
+                        <h:outputText value="#{telebeController.selected.ad}" title="#{bundle.ViewTelebeTitle_ad}"/>
+                        <h:outputText value="#{bundle.ViewTelebeLabel_soyad}"/>
+                        <h:outputText value="#{telebeController.selected.soyad}" title="#{bundle.ViewTelebeTitle_soyad}"/>
+                        <h:outputText value="#{bundle.ViewTelebeLabel_yash}"/>
+                        <h:outputText value="#{telebeController.selected.yash}" title="#{bundle.ViewTelebeTitle_yash}"/>
+                        <h:outputText value="#{bundle.ViewTelebeLabel_idQrup}"/>
+                        <h:outputText value="#{telebeController.selected.idQrup}" title="#{bundle.ViewTelebeTitle_idQrup}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TelebeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
